@@ -20,6 +20,16 @@ def scan():
     cursor.close()
     return output_formatter(results)
 
+def select_by_id(pk):
+    conn = get_db()
+    cursor = conn.execute(
+        "SELECT * FROM task WHERE id = ?",
+        (pk,)
+    )
+    results = cursor.fetchall()
+    cursor.close()
+    return output_formatter(results) 
+
 def insert(raw_data):
     task_data = (
         raw_data.get("title"),
